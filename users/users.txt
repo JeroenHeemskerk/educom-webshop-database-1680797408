@@ -1,0 +1,7 @@
+email|nama|password
+Hana.com| Hana| 6788
+jeroen@email.com| jeroen| 1233
+Nawras.com| Nawras| 4566
+jeroen.heemskerk@email.com| jeroen| 1233
+hannaalkadri@gmail.com| Hana| 5677
+nawras.n91.com| Nawras| 9191
