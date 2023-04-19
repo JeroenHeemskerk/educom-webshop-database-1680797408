@@ -1,5 +1,5 @@
 <?php
-include_once "file_repository.php";
+include_once "database_repository.php";
 function checkIfUserExist($email){
     $user=findUserByEmail($email);
     if (empty ($user)){
@@ -8,8 +8,8 @@ function checkIfUserExist($email){
     return true;
 }
 
-function storeUser($email,$name,$password){
-    saveUser($email,$name,$password);
+function storeUser($name,$email,$password){
+    saveUser($name,$email,$password);
 }
 function authenicateUser($email,$password){
     $user=findUserByEmail($email);

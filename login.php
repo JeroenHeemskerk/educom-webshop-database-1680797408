@@ -2,7 +2,7 @@
 
 
 function validateLogin(){
-    $email =  $emailErr = ""; $password = $passwordErr = ""; $valid = false; $loginErr=""; $name="";
+    $email =  $emailErr = ""; $password = $passwordErr = ""; $valid = false; $genericErr=""; $name="";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (empty(getPostVAR ("email"))) {
           $emailErr = "Email is required";
@@ -27,7 +27,7 @@ function validateLogin(){
                   $valid=true;
               }
           } catch (Exception $exception) {
-              $loginErr = "Unable to Login, please try again later";
+              $genericErr = "Unable to Login, please try again later";
               logToServer("unable to Login: " . $exception->getMessage());
           }
       }
@@ -36,7 +36,7 @@ function validateLogin(){
       "emailErr"=>$emailErr, "passwordErr"=>$passwordErr,
       "email"=>$email, "password"=>$password,
       "name"=>$name,
-      "valid"=>$valid,"loginErr" => $loginErr];
+      "valid"=>$valid,"genericErr" => $genericErr];
 }
 
     function showLoginHeader(){
@@ -45,12 +45,11 @@ function validateLogin(){
 
     
 
-    function showLoginForm($data)
-{
+    function showLoginForm($data){
     echo
     '<div class="content">
         <h2>Login:</h2>
-        <span class="error">'.$data["loginErr"].'</span>
+        <span class="error">'.$data["genericErr"].'</span>
         <form class="login-form" method="post" action="index.php">
             <label for="email">Email:</label>
             <input class="form-field" type="text" id="email" name="email" value="' . $data["email"] . '" />

@@ -30,7 +30,7 @@ function processRequest($page){
                 include_once 'register.php';
                 $data = validateRegister();
                 if ($data["valid"]) { 
-                    storeUser($data["email"],$data["name"],$data["password"]);
+                    storeUser($data["name"],$data["email"],$data["password"]);
                     $page = "login";
                 }
                 break;
