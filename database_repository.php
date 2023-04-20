@@ -43,6 +43,8 @@ function saveUser($name,$email,$password){
 
     mysqli_close($conn);
 }
-
+function saveInvoice(){
+    
+}
 
 ?>
