@@ -34,6 +34,15 @@ function processRequest($page){
                     $page = "login";
                 }
                 break;
+            case 'webshop':
+                include_once 'products_service.php';
+                $data = getWebshopData();
+                break;
+            case 'detail':
+                include_once 'products_service.php';
+                $productId = getURLVAR("id");
+                $data = getDetailData($productId);
+                break;    
             case 'login':
                 include_once 'login.php';
                 $data = validateLogin();
@@ -153,7 +162,7 @@ function showMenu(){
     showMenuItem('home','Home');
     showMenuItem('contact','Contact');
     showMenuItem('about','About');
-    
+    showMenuItem('webshop','webshop');
     
     if(isUserLoggedIn()){
         showMenuItem('logout','Logout').getLoggedinUserName();
@@ -180,6 +189,14 @@ function showContent($data){
         case "contact":
             include_once("contact.php");
             showContactForm($data);
+            break;
+        case "webshop":
+            include_once("webshop.php");
+            showWebshopContent($data);
+            break;
+        case "detail":
+            include_once("detail.php");
+            showDetailContent($data);
             break;
         case "thanks":
             showContactValid($data);

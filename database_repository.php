@@ -43,8 +43,66 @@ function saveUser($name,$email,$password){
 
     mysqli_close($conn);
 }
-function saveInvoice(){
+// function saveInvoice(){
+//     $date = "20-04-2023";
+//     $userId = 620;
+//     $deliveryDate = "24-04-2023";
+//     $deliveryAdresId = 41;
+
+//     $conn = connectToDataBase();
+//     $sql = "INSERT INTO invoice (date, user-id, delivery-date, delivery-adres-id)
+//     values('$date', '$userId' , '$deliveryDate', '$deliveryAdresId')";
+
+//     if (mysqli_query($conn, $sql)) {
+//         } else {
+//         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+//         }
+
+//         $invoiceId = mysqli_last_insert_id($conn);
     
+//     foreach ($cart as $proaductId => $quantity){
+//         $sql = "INSERT INTO invoiceRow (invoice-id, product-id, quantity)
+//         values('$invoiceId', '$productId' , '$quantity');
+//         if (mysqli_query($conn, $sql)) {
+//         } else {
+//         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+//         }
+     
+//     }
+        
+function getAllProducts(){
+    try{$conn = connectToDataBase();
+        $sql = "SELECT id ,name, price, image FROM `products`";
+        $result = $conn->query($sql);
+        $products = array();
+        
+        while($row = mysqli_fetch_assoc($result)){
+            $products[$row["id"]]= $row;
+        }
+        
+        return $products;
+    }
+   finally{
+    mysqli_close($conn);
+    }
+
+}
+
+function getProductById($productId){
+    try{$conn = connectToDataBase();
+        $sql = "SELECT id ,name, price, image,description FROM `products` where id = $productId";
+        $result = $conn->query($sql);
+        $product = array();
+        while($row = mysqli_fetch_assoc($result)){
+            $product= $row;
+        }
+
+        return $product;
+    }
+   finally{
+    mysqli_close($conn);
+    }
+
 }
 
 ?>

@@ -58,3 +58,8 @@ form label {
 .error {
   color: red;
 }
+
+.webshopProduct {
+  display: inline-block;
+  margin-right: 20px;
+}
