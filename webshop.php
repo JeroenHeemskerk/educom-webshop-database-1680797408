@@ -22,6 +22,8 @@ function showWebshopProducts($product){
     echo '<div class="webshopName">';
     echo '<h2>'.$product["name"].'</h2>';
     echo '</div>';
+    echo '<div class="webshopPrijs">';
+    echo '<h2>'.$product["price"].'</h2>';
     echo '<div class="webshopImage">';
     echo '<img src="images/' . $product["image"] . '" width="300" height="300" >';
     echo '</div>';
