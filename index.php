@@ -252,7 +252,7 @@ function showError(){
 
 function showFooter(){
     echo "<footer>";
-    echo "Copy Right 2023 Hana"; 
+    echo "Copy Right © 2023 Hana"; 
     echo "</footer>";
 }
 
