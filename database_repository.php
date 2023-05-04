@@ -30,8 +30,25 @@ function findUserByEmail($email){
     }
 
 }
+function updatePassword($userId,$password){
+    try{$conn = connectToDataBase();
+        $sql = "UPDATE users SET password='$password' WHERE id=$userId ";
+    
+        if (mysqli_query($conn, $sql)) {
+            echo "updated successfully";
+          } else {
+            echo "Error updating: " . mysqli_error($conn);
+          }
+    }
+   finally{
+    mysqli_close($conn);
+    }
+}
+
+
+
 function saveUser($name,$email,$password){
-    $conn = connectToDataBase();
+    try{$conn = connectToDataBase();
     $sql = "INSERT INTO users (name, email, password)
     VALUES ('$name', '$email', '$password')";
 
@@ -41,7 +58,10 @@ function saveUser($name,$email,$password){
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 
+    }
+    finally{
     mysqli_close($conn);
+    }
 }
 // function saveInvoice(){
 //     $date = "20-04-2023";
@@ -104,5 +124,22 @@ function getProductById($productId){
     }
 
 }
+
+function deleteProductById($productId){
+    $conn = connectToDataBase();
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+      }
+      $sql = "SELECT id ,name, price, image,description FROM `products` where id = $productId";
+      if (mysqli_query($conn, $sql)) {
+        echo "Record deleted successfully";
+      } else {
+        echo "Error deleting record: " . mysqli_error($conn);
+      }
+      
+      mysqli_close($conn);
+
+}
+
 
 ?>

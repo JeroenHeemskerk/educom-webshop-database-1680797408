@@ -37,7 +37,7 @@ function validateLogin(){
       "email"=>$email, "password"=>$password,
       "name"=>$name,
       "valid"=>$valid,"genericErr" => $genericErr];
-}
+    }
 
     function showLoginHeader(){
         echo 'This is login page';
@@ -63,18 +63,17 @@ function validateLogin(){
             <input type="submit" name="login" value="Login" id="login">
         </form>
     </div>';
-}
+    }
     function showLoginValid($data)
      {
     echo "You are logged in ".$data["name"];
     doLoginUser($data["name"]);
     include_once("home.php");
     showHomeContent();
-}
+    }
 
     function showLogoutValid(){
         doLogOutUser();
-
     }
 
 ?>

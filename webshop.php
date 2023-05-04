@@ -20,17 +20,26 @@ function showWebshopProducts($product){
     >';
     echo '<div class="webshopProduct">';
     echo '<div class="webshopName">';
-    echo '<h1>'.$product["name"].'</h1>';
+    echo '<h2>'.$product["name"].'</h2>';
     echo '</div>';
     echo '<div class="webshopImage">';
     echo '<img src="images/' . $product["image"] . '" width="300" height="300" >';
     echo '</div>';
     echo '</div>';
-    echo'</a
-
-  >';
+    echo'</a>';
+    echo '<form action="index.php" method="post">
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" min="1" max="100">
+    <input type="hidden" name="ProductId" value="'.$product["id"].'">
+    <input type="submit" value="Add Product">
+    <input type="hidden" name="page" value="shoppingcart">
+    <input type="hidden" name="action" value="addShoppingCart">
+  </form>
+  ';
 
 }
+
+
 
 
 

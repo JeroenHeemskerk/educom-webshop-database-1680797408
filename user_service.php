@@ -23,6 +23,10 @@ function authenicateUser($email,$password){
     return $user;
     
 }
+function changePassword($userId,$password){
+    updatePassword($userId,$password);
+
+}
 
 
 

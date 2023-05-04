@@ -51,6 +51,10 @@ function processRequest($page){
                 $page = "home";
                 }
                 break;
+            case 'shoppingcart':
+                include_once'shoppingcart.php';
+                handleAction();
+                break;
             case 'logout';
                 doLogOutUser();
                 $page = "home";
@@ -143,6 +147,18 @@ function showHeader($page){
             include_once 'login.php';
             showLoginHeader();
             break;
+        case 'detail':
+            include_once 'detail.php';
+            showDetailHeader();
+            break;
+        case 'webshop':
+            include_once 'webshop.php';
+            showWebshopHeader();
+            break;
+        case 'shoppingcart':
+            include_once 'shoppingcart.php';
+            showShoppingcartHeader();
+            break;
     }
       
     echo '</h1>
@@ -198,6 +214,10 @@ function showContent($data){
             include_once("detail.php");
             showDetailContent($data);
             break;
+        case "shoppingcart":
+            include_once("shoppingcart.php");
+            showShoppingcartContent($data);
+            break;    
         case "thanks":
             showContactValid($data);
             showThankyouPage($data);
