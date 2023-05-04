@@ -56,7 +56,7 @@ function validateLogin(){
             <span class="error">* ' . $data["emailErr"] . '</span>
             <br />
             <label for="password">Password:</label>
-            <input class="form-field" type="text" id="password" name="password" value="' . $data["password"] . '" />
+            <input class="form-field" type="password" id="password" name="password" value="' . $data["password"] . '" />
             <span class="error">* ' . $data["passwordErr"] . '</span>
             <br />
             <input type="hidden" name="page" value="login">
