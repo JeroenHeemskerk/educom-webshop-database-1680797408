@@ -62,6 +62,7 @@ function saveUser($name,$email,$password){
     finally{
     mysqli_close($conn);
     }
+    
 }
 // function saveInvoice(){
 //     $date = "20-04-2023";
