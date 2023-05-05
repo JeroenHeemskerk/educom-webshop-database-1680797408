@@ -61,6 +61,8 @@ function validateLogin(){
             <br />
             <input type="hidden" name="page" value="login">
             <input type="submit" name="login" value="Login" id="login">
+            <input type="hidden" name="page" value="changePassword">
+            <input type="submit" name="changePassword" value="changePassword" id="changePassword">
         </form>
     </div>';
     }
@@ -68,6 +70,8 @@ function validateLogin(){
      {
     echo "You are logged in ".$data["name"];
     doLoginUser($data["name"]);
+    include_once("changePassword.php");
+    showChangePasswordForm($data);
     include_once("home.php");
     showHomeContent();
     }

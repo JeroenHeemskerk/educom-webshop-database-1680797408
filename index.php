@@ -51,8 +51,16 @@ function processRequest($page){
                 $page = "home";
                 }
                 break;
+            case 'changePassword';
+                include_once 'changePassword.php';
+                $data = ValidateChangePassword();
+                if ($data["valid"]) { 
+                    changePassword($data["userId"],$data["password"]);
+                    $page = "home";
+                }
+                break;
             case 'shoppingcart':
-                include_once'shoppingcart.php';
+                include_once 'shoppingcart.php';
                 handleAction();
                 break;
             case 'logout';
@@ -159,6 +167,10 @@ function showHeader($page){
             include_once 'shoppingcart.php';
             showShoppingcartHeader();
             break;
+        case 'changePassword':
+            include_once 'changePassword.php';
+            showChangePasswordHeader();
+            break;
     }
       
     echo '</h1>
@@ -230,7 +242,11 @@ function showContent($data){
             include_once("login.php");
             showLoginForm($data);
             break;
-
+        case "changePassword":
+            include_once("changePassword.php");
+            showChangePasswordForm($data);
+            showChangePasswordValid();
+            break;
         case "logout":
             include_once("login.php");
             showLogoutValid();

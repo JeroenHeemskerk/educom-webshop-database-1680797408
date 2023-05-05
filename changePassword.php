@@ -1,4 +1,8 @@
 <?php
+function showChangePasswordHeader(){
+    echo 'Change Password';
+}
+
 function ValidateChangePassword(){
     $currentPassword = $currentPasswordErr="";
     $changePassword = $changePasswordErr= "";
@@ -22,12 +26,29 @@ function ValidateChangePassword(){
           } else {
             $repeateChangePassword = test_input(getPostVAR ("repeateChangePassword"));
           } 
+          if ( empty($currentPasswordErr) && empty ($changePasswordErr) && empty ($repeateChangePasswordErr)) {
+            try {
+                include("user_service.php");
+                $user= checkPassword($userId,$password);
+  
+                if(empty($user)) {
+                    $passwordErr = "uncorrect password";
+                }
+                else{
+                    $name=$user["name"];
+                    $valid=true;
+                }
+            } catch (Exception $exception) {
+                $genericErr = "Unable to Login, please try again later";
+                logToServer("unable to Login: " . $exception->getMessage());
+            }
 
     }
     return[
         "currentPassword"=>$currentPassword, "currentPasswordErr"=>$currentPasswordErr,
         "changePassword"=>$changePassword, "changePasswordErr"=>$changePasswordErr,
         "repeateChangePassword"=>$repeateChangePassword, "repeateChangePasswordErr"=>$repeateChangePasswordErr];
+}
 }
 
 
@@ -49,8 +70,8 @@ function showChangePasswordForm($data){
             <input class="form-field" type="password" id="repeateChangePassword" name="repeateChangePassword" value="' . $data["repeateChangePassword"] . '" />
             <span class="error">* ' . $data["repeateChangePasswordErr"] . '</span>
             <br />
-            <input type="hidden" name="page" value="login">
-            <input type="submit" name="login" value="Login" id="login">
+            <input type="hidden" name="page" value="change password">
+            <input type="submit" name="change password" value="change password" id="change password">
         </form>
     </div>';
     }

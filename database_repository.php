@@ -30,6 +30,24 @@ function findUserByEmail($email){
     }
 
 }
+function findUserByUserId($userId){
+    try{$conn = connectToDataBase();
+        $sql = "SELECT * FROM `users` WHERE userId = '$userId'";
+        $result = $conn->query($sql);
+    
+        while($row = mysqli_fetch_assoc($result)){
+            return $row;
+        }
+        
+        return null;
+    }
+   finally{
+    mysqli_close($conn);
+    }
+}
+
+
+
 function updatePassword($userId,$password){
     try{$conn = connectToDataBase();
         $sql = "UPDATE users SET password='$password' WHERE id=$userId ";
@@ -62,7 +80,7 @@ function saveUser($name,$email,$password){
     finally{
     mysqli_close($conn);
     }
-    
+
 }
 // function saveInvoice(){
 //     $date = "20-04-2023";
