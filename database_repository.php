@@ -8,9 +8,10 @@ function connectToDataBase(){
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+
+    if (!$conn) {
+        throw new Exception("Database connection failed: " .  mysqli_connect_error());
+   }
     return $conn;
 }
 
@@ -18,6 +19,9 @@ function findUserByEmail($email){
     try{$conn = connectToDataBase();
         $sql = "SELECT * FROM `users` WHERE email = '$email'";
         $result = $conn->query($sql);
+        if (!$result) {
+            throw new Exception("Read user failed, SQL: " . $sql  . ", Error: " .  mysqli_error($conn));
+       }
     
         while($row = mysqli_fetch_assoc($result)){
             return $row;
@@ -32,8 +36,11 @@ function findUserByEmail($email){
 }
 function findUserByUserId($userId){
     try{$conn = connectToDataBase();
-        $sql = "SELECT * FROM `users` WHERE userId = '$userId'";
+        $sql = "SELECT * FROM `users` WHERE Id = '$userId'";
         $result = $conn->query($sql);
+        if (!$result) {
+            throw new Exception("Read user failed, SQL: " . $sql  . ", Error: " .  mysqli_error($conn));
+       }
     
         while($row = mysqli_fetch_assoc($result)){
             return $row;
@@ -52,11 +59,9 @@ function updatePassword($userId,$password){
     try{$conn = connectToDataBase();
         $sql = "UPDATE users SET password='$password' WHERE id=$userId ";
     
-        if (mysqli_query($conn, $sql)) {
-            echo "updated successfully";
-          } else {
-            echo "Error updating: " . mysqli_error($conn);
-          }
+        if (!mysqli_query($conn, $sql)) {
+            throw new Exception("Delete user failed, SQL: " . $sql  . ", Error: " .  mysqli_error($conn));
+       }
     }
    finally{
     mysqli_close($conn);
@@ -113,6 +118,9 @@ function getAllProducts(){
     try{$conn = connectToDataBase();
         $sql = "SELECT id ,name, price, image FROM `products`";
         $result = $conn->query($sql);
+        if (!$result) {
+            throw new Exception("Read user failed, SQL: " . $sql  . ", Error: " .  mysqli_error($conn));
+       }
         $products = array();
         
         while($row = mysqli_fetch_assoc($result)){

@@ -2,7 +2,7 @@
 
 
 function validateLogin(){
-    $email =  $emailErr = ""; $password = $passwordErr = ""; $valid = false; $genericErr=""; $name="";
+    $email =  $emailErr = ""; $password = $passwordErr = ""; $valid = false; $genericErr=""; $name=""; $userId = 0;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (empty(getPostVAR ("email"))) {
           $emailErr = "Email is required";
@@ -24,6 +24,7 @@ function validateLogin(){
               }
               else{
                   $name=$user["name"];
+                  $userId=$user["id"];
                   $valid=true;
               }
           } catch (Exception $exception) {
@@ -36,7 +37,8 @@ function validateLogin(){
       "emailErr"=>$emailErr, "passwordErr"=>$passwordErr,
       "email"=>$email, "password"=>$password,
       "name"=>$name,
-      "valid"=>$valid,"genericErr" => $genericErr];
+      "valid"=>$valid,"genericErr" => $genericErr,
+      "userId"=>$userId];
     }
 
     function showLoginHeader(){
@@ -61,8 +63,6 @@ function validateLogin(){
             <br />
             <input type="hidden" name="page" value="login">
             <input type="submit" name="login" value="Login" id="login">
-            <input type="hidden" name="page" value="changePassword">
-            <input type="submit" name="changePassword" value="changePassword" id="changePassword">
         </form>
     </div>';
     }

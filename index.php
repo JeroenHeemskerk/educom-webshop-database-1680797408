@@ -47,7 +47,7 @@ function processRequest($page){
                 include_once 'login.php';
                 $data = validateLogin();
                 if ($data["valid"]){
-                doLoginUser($data["name"]);
+                doLoginUser($data["name"],$data["userId"]);
                 $page = "home";
                 }
                 break;
@@ -55,7 +55,7 @@ function processRequest($page){
                 include_once 'changePassword.php';
                 $data = ValidateChangePassword();
                 if ($data["valid"]) { 
-                    changePassword($data["userId"],$data["password"]);
+                    changePassword($data["userId"],$data["changePassword"]);
                     $page = "home";
                 }
                 break;
@@ -191,8 +191,10 @@ function showMenu(){
     showMenuItem('contact','Contact');
     showMenuItem('about','About');
     showMenuItem('webshop','webshop');
+
     
     if(isUserLoggedIn()){
+        showMenuItem('changePassword','change Password');
         showMenuItem('logout','Logout').getLoggedinUserName();
     }else{
         showMenuItem('register','Register');
@@ -245,7 +247,6 @@ function showContent($data){
         case "changePassword":
             include_once("changePassword.php");
             showChangePasswordForm($data);
-            showChangePasswordValid();
             break;
         case "logout":
             include_once("login.php");
