@@ -74,12 +74,10 @@ function saveUser($name,$email,$password){
     try{$conn = connectToDataBase();
     $sql = "INSERT INTO users (name, email, password)
     VALUES ('$name', '$email', '$password')";
-
-    if (mysqli_query($conn, $sql)) {
-    echo "New record created successfully";
-    } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
+        if (!mysqli_query($conn, $sql)) {
+            throw new Exception("Insert user field, SQL: " . $sql  . ", Error: " .  mysqli_error($conn));
+       }
+    
 
     }
     finally{
