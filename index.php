@@ -69,6 +69,14 @@ function processRequest($page){
                 break;    
         }
         $data["page"]=$page;
+        $data['menu'] = array('home' => 'Home', 'contact' => 'Contact', 'about' => 'About', 'webshop' => 'Webshop');
+        if (isUserLoggedIn()) {
+            $data['menu']['logout'] = "Logout " . getLoggedInUserName(); 
+            $data['menu']['changePassword'] = 'change Password';
+          } else {
+            $data['menu']['register'] = "Register";
+            $data['menu']['login'] = "Login";
+         }
         return $data;
     }
 
@@ -121,7 +129,7 @@ function showLinks(){
 function showHtmlBody($data){
     echo "<body>";
     showHeader($data["page"]);
-    showMenu();
+    showMenu($data);
     showContent($data);
     showFooter();
     echo "</body>";
@@ -184,24 +192,13 @@ function showMenuItem($link, $label){
 
     </li>";
   }
-function showMenu(){
+function showMenu($data){
     echo
     '<ul class="menu">';
-    showMenuItem('home','Home');
-    showMenuItem('contact','Contact');
-    showMenuItem('about','About');
-    showMenuItem('webshop','webshop');
-
-    
-    if(isUserLoggedIn()){
-        showMenuItem('changePassword','change Password');
-        showMenuItem('logout','Logout').getLoggedinUserName();
-    }else{
-        showMenuItem('register','Register');
-        showMenuItem('login','Login');
-    
-     }
-     echo
+    foreach( $data['menu']as $link => $label){
+        showMenuItem($link,$label);
+    }
+    echo
      '</ul>';
     }
 
