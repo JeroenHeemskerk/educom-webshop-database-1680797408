@@ -59,9 +59,14 @@ function processRequest($page){
                     $page = "home";
                 }
                 break;
-            case 'shoppingcart':
+
+
+            case 'shoppingCart':
                 include_once 'shoppingcart.php';
+                include_once 'products_service.php';
                 handleAction();
+                $cart = getShoppingCart();
+                $data = getShoppingCartData($cart);
                 break;
             case 'logout';
                 doLogOutUser();
@@ -72,7 +77,9 @@ function processRequest($page){
         $data['menu'] = array('home' => 'Home', 'contact' => 'Contact', 'about' => 'About', 'webshop' => 'Webshop');
         if (isUserLoggedIn()) {
             $data['menu']['logout'] = "Logout " . getLoggedInUserName(); 
-            $data['menu']['changePassword'] = 'change Password';
+            $data['menu']['changePassword'] = 'Change Password';
+            $data['menu']['shoppingCart'] = 'Shopping Cart';
+
           } else {
             $data['menu']['register'] = "Register";
             $data['menu']['login'] = "Login";
@@ -171,7 +178,7 @@ function showHeader($page){
             include_once 'webshop.php';
             showWebshopHeader();
             break;
-        case 'shoppingcart':
+        case 'shoppingCart':
             include_once 'shoppingcart.php';
             showShoppingcartHeader();
             break;
@@ -225,7 +232,7 @@ function showContent($data){
             include_once("detail.php");
             showDetailContent($data);
             break;
-        case "shoppingcart":
+        case "shoppingCart":
             include_once("shoppingcart.php");
             showShoppingcartContent($data);
             break;    

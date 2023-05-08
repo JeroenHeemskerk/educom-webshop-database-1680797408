@@ -3,6 +3,7 @@
 function doLoginUser($name,$userId){
     $_SESSION["Login user"]=$name;
     $_SESSION["userId"]=$userId;
+    $_SESSION["cart"]=[];
 }
 
 function isUserLoggedIn(){

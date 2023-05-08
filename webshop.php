@@ -34,7 +34,7 @@ function showWebshopProducts($product){
     <input type="number" id="quantity" name="quantity" min="1" max="100">
     <input type="hidden" name="ProductId" value="'.$product["id"].'">
     <input type="submit" value="Add Product">
-    <input type="hidden" name="page" value="shoppingcart">
+    <input type="hidden" name="page" value="shoppingCart">
     <input type="hidden" name="action" value="addShoppingCart">
   </form>
   ';

@@ -155,7 +155,7 @@ function deleteProductById($productId){
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
       }
-      $sql = "SELECT id ,name, price, image,description FROM `products` where id = $productId";
+      $sql = "DELETE FROM `products` where id = $productId";
       if (mysqli_query($conn, $sql)) {
         echo "Record deleted successfully";
       } else {
