@@ -23,7 +23,7 @@ function handleAction(){
             updateShoppingCart($ProductId,$Quantity);
             break;    
 
-    
+
     }
 
 
