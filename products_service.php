@@ -44,6 +44,9 @@ function getShoppingCartData($cart){
 }
 
 
+function storeOrder(){
+  
+}
 
 
 ?>

@@ -38,8 +38,14 @@ function getShoppingCart(){
 
 }
 
+function updateShoppingCart($productId,$quantity){
+  $_SESSION['cart'][$productId] = $quantity;
+}
 
 
 
+function findInvoiceByUserId(){
+  getLoggedinUserId();
+}
 
 ?>

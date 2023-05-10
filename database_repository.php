@@ -85,32 +85,35 @@ function saveUser($name,$email,$password){
     }
 
 }
-// function saveInvoice(){
-//     $date = "20-04-2023";
-//     $userId = 620;
-//     $deliveryDate = "24-04-2023";
-//     $deliveryAdresId = 41;
+function saveInvoice($userId,$cart){
 
-//     $conn = connectToDataBase();
-//     $sql = "INSERT INTO invoice (date, user-id, delivery-date, delivery-adres-id)
-//     values('$date', '$userId' , '$deliveryDate', '$deliveryAdresId')";
+    $conn = connectToDataBase();
+    $sql = "INSERT INTO invoice (user_id)
+    values('$userId')";
 
-//     if (mysqli_query($conn, $sql)) {
-//         } else {
-//         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-//         }
+    if (mysqli_query($conn, $sql)) {
+        } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
 
-//         $invoiceId = mysqli_last_insert_id($conn);
-    
-//     foreach ($cart as $proaductId => $quantity){
-//         $sql = "INSERT INTO invoiceRow (invoice-id, product-id, quantity)
-//         values('$invoiceId', '$productId' , '$quantity');
-//         if (mysqli_query($conn, $sql)) {
-//         } else {
-//         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-//         }
-     
-//     }
+        $invoiceId = mysqli_insert_id($conn);
+
+    foreach ($cart as $productId => $quantity){
+        saveInvoiceRow($invoiceId,$productId,$quantity);
+    }
+}
+
+function saveInvoiceRow($invoiceId,$productId,$quantity){
+    $conn = connectToDataBase();
+    $sql = "INSERT INTO invoice_row (invoice_id,product_id,quantity)
+    values('$invoiceId','$productId','$quantity')";
+
+    if (mysqli_query($conn, $sql)) {
+        } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
+
         
 function getAllProducts(){
     try{$conn = connectToDataBase();
